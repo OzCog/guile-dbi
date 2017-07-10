@@ -24,8 +24,8 @@
 #include <guile-dbi/guile-dbi.h>
 #include <string.h>
 #include <errno.h>
-#include <dlfcn.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 
 static scm_t_bits g_db_handle_tag;
@@ -59,9 +59,8 @@ SCM_DEFINE (make_g_db_handle, "dbi-open", 2, 0, 0,
   g_db_handle->bcknd_str = scm_to_locale_string (bcknd);
   g_db_handle->bcknd_strlen = strlen(g_db_handle->bcknd_str);
 
-  /* The +20 allos for .so or .dylib on MacOS */
   sodbd_len = sizeof(char) * (strlen("libguile-dbd-") +
-                   g_db_handle->bcknd_strlen + 20);
+                   g_db_handle->bcknd_strlen + 1);
   sodbd = (char*) malloc (sodbd_len);
   if (sodbd == NULL)
     {
@@ -70,18 +69,14 @@ SCM_DEFINE (make_g_db_handle, "dbi-open", 2, 0, 0,
       SCM_RETURN_NEWSMOB (g_db_handle_tag, g_db_handle);
     }
 
-#ifdef  __APPLE__
-  snprintf(sodbd, sodbd_len, "libguile-dbd-%s.dylib", g_db_handle->bcknd_str);
-#else
-  snprintf(sodbd, sodbd_len, "libguile-dbd-%s.so", g_db_handle->bcknd_str);
-#endif
+  snprintf(sodbd, sodbd_len, "libguile-dbd-%s", g_db_handle->bcknd_str);
 
-  g_db_handle->handle = dlopen(sodbd, RTLD_NOW);
+  g_db_handle->handle = lt_dlopenext(sodbd);
   if (g_db_handle->handle == NULL)
     {
       free(sodbd);
       g_db_handle->status =  scm_cons(scm_from_int(1),
-                              scm_from_locale_string(dlerror()));      
+                              scm_from_locale_string(lt_dlerror()));
       SCM_RETURN_NEWSMOB (g_db_handle_tag, g_db_handle);
     }
 
@@ -174,7 +169,7 @@ SCM_DEFINE (close_g_db_handle, "dbi-close", 1, 0, 0,
   (*dbd_close)(g_db_handle);
   if (g_db_handle->handle)
     {
-      dlclose(g_db_handle->handle);
+      lt_dlclose(g_db_handle->handle);
       g_db_handle->handle = NULL;
     }
   scm_remember_upto_here_1(db_handle);
@@ -311,6 +306,8 @@ init_dbi(void)
   if (is_inited) return;
   is_inited = 1;
   init_db_handle_type();
+  lt_dlinit();
+  lt_dlsetsearchpath(getenv("GUILE_DBD_PATH"));
 
 #ifndef SCM_MAGIC_SNARFER
 #include "guile-dbi.x"
@@ -324,7 +321,7 @@ void
 __gdbi_dbd_wrap(gdbi_db_handle_t* dbh, const char* function_name,
                 void** function_pointer)
 {
-  char *ret   = NULL;
+  const char *ret   = NULL;
   char *func  = NULL;
   size_t func_len;
 
@@ -340,9 +337,9 @@ __gdbi_dbd_wrap(gdbi_db_handle_t* dbh, const char* function_name,
 
   /* I assume this is correct for all OS'es */
   snprintf(func, func_len, "__%s_%s", dbh->bcknd_str, function_name);
-  dlerror();    /* Clear any existing error -- Solaris needs this */
-  *function_pointer = dlsym(dbh->handle, func);
-  if ((ret = dlerror()) != NULL)
+  lt_dlerror();    /* Clear any existing error -- Solaris needs this */
+  *function_pointer = lt_dlsym(dbh->handle, func);
+  if ((ret = lt_dlerror()) != NULL)
     {
       free(func);
       if (dbh->in_free) return; /* do not SCM anything while in GC */

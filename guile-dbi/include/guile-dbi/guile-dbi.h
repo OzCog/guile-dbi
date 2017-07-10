@@ -24,6 +24,7 @@
 #define __GUILE_DBI_H__
 
 #include <libguile.h>
+#include <ltdl.h>
 
 /* guile smob struct */
 typedef struct
@@ -32,7 +33,7 @@ typedef struct
   SCM constr;
   SCM status;  /* pair: car = error numeric code, cdr = status message */
   SCM closed;  /* boolean, TRUE if closed otherwise FALSE */
-  void* handle;
+  lt_dlhandle handle;
   void* db_info;
   int in_free;  /* boolean, used to avoid alloc during garbage collection */
   const char * bcknd_str;

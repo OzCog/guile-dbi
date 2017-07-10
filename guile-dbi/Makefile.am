@@ -24,7 +24,7 @@
 ACLOCAL_AMFLAGS = -I m4
 
 AUTOMAKE_OPTIONS = gnu
-SUBDIRS = src include doc
+SUBDIRS = libltdl src include doc
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = guile-dbi.pc

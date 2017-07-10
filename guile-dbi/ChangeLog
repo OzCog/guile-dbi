@@ -1,3 +1,12 @@
+Version 2.1.7: (XXX)
+	* include/guile-dbi/guile-dbi.h (gdbi_db_handle_t): Use 'lt_dlhandle'.
+	* src/guile-dbi.c: Replace libdl calls with their libltdl equivalences.
+	* Makefile.am (SUBDIRS): Add libltdl.
+	* configure.ac: Use LTDL_INIT.  Add LTDLINCL and LIBLTDL to flags.
+	* src/Makefile.am (libguile_dbi_la_LIBDD): Remove '-ldl'.
+	* src/guile-dbi.c (init_dbi): Call 'lt_dlsetsearchpath'.
+	* doc/guile-dbi.texi: Adjust to the usage of libltdl.
+
 Version 2.1.6: (2015-08-01):
 	* src/Makefile.am (libguile_dbi_la_LIBADD): Remove '-lz'.
 	* src/test/Makefile.am (libguile_dbd_test_la_LIBADD): Remove '-lz'.

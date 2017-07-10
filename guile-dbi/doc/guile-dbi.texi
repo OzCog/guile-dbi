@@ -312,7 +312,7 @@ typedef struct g_db_handle
   SCM constr;
   SCM status;  /* pair: car = error numeric code, cdr = status message */
   SCM closed;  /* boolean, TRUE if closed otherwise FALSE */
-  void* handle;
+  lt_dlhandle handle;
   void* db_info;
   int in_free; /* boolean, used to avoid alloc during garbage collection */
 @} gdbi_db_handle_t;
@@ -327,7 +327,7 @@ backend to the dbi interface library. Its car is returns a status code number,
 cdr is a status return message.
 @item @code{closed} boolean, @code{#t} if the connection is closed, and
 @code{#f} otherwise.
-@item @code{handle} is a void pointer used to point to dynamically
+@item @code{handle} is a lt_dlhandle used to point to dynamically
 loaded back-end library, filled by dbi-open @code{__gdbi_dbd_wrap}.
 Set to ``NULL'' at connection close.
 @item @code{db_info} is a void pointer used by the backends as a data
@@ -364,18 +364,21 @@ Used to expose guile-dbi symbols so, scheme can call them.
 @node How plugins are loaded, How to write plugins, Internal functions, Internals and Database Drivers
 @section How plugins are loaded
 
-Everything starts at @code{s_make_db_handle}. This function uses dlopen
-to load a shared library named ``libguile-dbd-bcknd.so''. bcknd is the
-first param of dbi-open.
+Everything starts at @code{s_make_db_handle}. This function uses
+libltdl to load a shared library named ``libguile-dbd-bcknd'' with the
+extension of ``.la'', ``.so'', etc. It's searched in the value of
+environment variable @code{GUILE_DBD_PATH} first, then libltdl's
+search patch and system library search path. bcknd is the first param
+of dbi-open.
 
 @*
 If the shared library is successfully loaded, the dbh's field ``handle''
-is filled with the pointer returned by ``dlopen'' and dbh->status is
+is filled with the pointer returned by ``lt_dlopen'' and dbh->status is
 set.  Otherwise the status is set to an error code in the car location,
 while cdr is filled with an error message returned by @code{strerror}.
 
 @*
-Once ``dlopen'' is ok, @code{__gdbi_dbd_wrap} is used to call the backend
+Once ``lt_dlopen'' is ok, @code{__gdbi_dbd_wrap} is used to call the backend
 plugin connect function passing it the connection string. If this
 step also succeeds, then the db should be connected.
 @sp 1

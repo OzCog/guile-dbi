@@ -35,7 +35,7 @@ SUFFIXES = .x
 lib_LTLIBRARIES = libguile-dbi.la 
 
 libguile_dbi_la_SOURCES = guile-dbi.c guile-dbi.x 
-libguile_dbi_la_LIBADD = -ldl $(LIBS)
+libguile_dbi_la_LIBADD = $(LIBS)
 libguile_dbi_la_LDFLAGS = -export-dynamic -version-info @DBI_INTERFACE@
 libguile_dbi_la_DEPENDENCIES = $(LTLIBOBJS)
 
