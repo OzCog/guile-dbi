@@ -160,18 +160,20 @@ SCM_DEFINE (close_g_db_handle, "dbi-close", 1, 0, 0,
       return  SCM_UNSPECIFIED;
     }
 
-  __gdbi_dbd_wrap(g_db_handle, __FUNCTION__,(void**) &dbd_close);
-  if (scm_equal_p (SCM_CAR(g_db_handle->status),scm_from_int(0)) == SCM_BOOL_F)
+  __gdbi_dbd_wrap(g_db_handle, __FUNCTION__, (void**) &dbd_close);
+  if (scm_equal_p (SCM_CAR(g_db_handle->status), scm_from_int(0)) == SCM_BOOL_F)
     {
       scm_remember_upto_here_1(db_handle);
       return  SCM_UNSPECIFIED;
     }
+
   (*dbd_close)(g_db_handle);
   if (g_db_handle->handle)
     {
       lt_dlclose(g_db_handle->handle);
       g_db_handle->handle = NULL;
     }
+
   scm_remember_upto_here_1(db_handle);
   return  SCM_UNSPECIFIED;
 }
