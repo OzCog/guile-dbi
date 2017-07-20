@@ -80,7 +80,7 @@ SCM_DEFINE (make_g_db_handle, "dbi-open", 2, 0, 0,
       SCM_RETURN_NEWSMOB (g_db_handle_tag, g_db_handle);
     }
 
-  __gdbi_dbd_wrap(g_db_handle, __FUNCTION__,(void**) &connect);
+  __gdbi_dbd_wrap(g_db_handle, __FUNCTION__, (void**) &connect);
   if (scm_equal_p (SCM_CAR(g_db_handle->status),scm_from_int(0)) == SCM_BOOL_F)
     {
       free(sodbd);
@@ -220,7 +220,7 @@ SCM_DEFINE (query_g_db_handle, "dbi-query", 2, 0, 0,
   g_db_handle = (gdbi_db_handle_t *) SCM_SMOB_DATA(db_handle);
   query_str = scm_to_locale_string(query);
 
-  __gdbi_dbd_wrap(g_db_handle, __FUNCTION__,(void**) &dbi_query);
+  __gdbi_dbd_wrap(g_db_handle, __FUNCTION__, (void**) &dbi_query);
   if (scm_equal_p(SCM_CAR(g_db_handle->status), scm_from_int(0)) == SCM_BOOL_T)
     {
       (*dbi_query)(g_db_handle, query_str);
@@ -246,7 +246,7 @@ SCM_DEFINE (getrow_g_db_handle, "dbi-get_row", 1, 0, 0,
   SCM_ASSERT (DBI_SMOB_P(db_handle), db_handle, SCM_ARG1, FUNC_NAME);  
   g_db_handle = (gdbi_db_handle_t *) SCM_SMOB_DATA(db_handle);
 
-  __gdbi_dbd_wrap(g_db_handle, __FUNCTION__,(void**) &dbi_getrow);
+  __gdbi_dbd_wrap(g_db_handle, __FUNCTION__, (void**) &dbi_getrow);
   if (scm_equal_p (SCM_CAR(g_db_handle->status),scm_from_int(0)) == SCM_BOOL_F)
     {
       scm_remember_upto_here_1(db_handle);
