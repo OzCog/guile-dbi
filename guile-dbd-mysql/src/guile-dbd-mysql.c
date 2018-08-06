@@ -260,7 +260,7 @@ __mysql_query_g_db_handle(gdbi_db_handle_t* dbh, char* query)
 
   if (err)
     {
-      dbh->status = scm_cons(scm_from_int(1),
+      dbh->status = scm_cons(scm_from_int(mysqlP->mysql->net.last_errno),
 				   scm_from_locale_string(mysql_error(mysqlP->mysql)));
       return;
     }
