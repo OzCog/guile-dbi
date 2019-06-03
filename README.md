@@ -59,7 +59,7 @@ cd guile-dbi
 ./autogen.sh --no-configure
 mkdir build
 cd build
-./configure
+../configure
 make
 sudo make install
 ```
@@ -69,7 +69,7 @@ cd guile-dbd-[mysql, postgresql, sqlite3]
 ./autogen.sh --no-configure
 mkdir build
 cd build
-./configure
+../configure
 make
 sudo make install
 ```
