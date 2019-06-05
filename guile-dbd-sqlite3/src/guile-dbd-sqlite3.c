@@ -18,6 +18,7 @@
 #include <libguile.h>
 #include <sqlite3.h>
 #include <errno.h>
+#include <sys/time.h>
 
 void __sqlite3_make_g_db_handle(gdbi_db_handle_t *dbh);
 void __sqlite3_close_g_db_handle(gdbi_db_handle_t *dbh);
@@ -25,10 +26,21 @@ void __sqlite3_query_g_db_handle(gdbi_db_handle_t *dbh, char *query_str);
 SCM __sqlite3_getrow_g_db_handle(gdbi_db_handle_t *dbh);
 SCM status_cons(int code, const char *message);
 
+// Define PERF_DEBUG to get perdiodic printing of time spent in this
+// code and the total elapsed time, including application time.
+// Useful for verifying expected performance.
+// #define PERF_DEBUG 1
+
 typedef struct
 {
   sqlite3 *sqlite3_obj;
   sqlite3_stmt *stmt;
+#ifdef PERF_DEBUG
+  struct timeval toti;
+  struct timeval lati;
+  int totcnt;
+  int lastcnt;
+#endif
 } gdbi_sqlite3_ds_t;
 
 SCM status_cons(int code, const char *message)
@@ -61,6 +73,19 @@ void __sqlite3_make_g_db_handle(gdbi_db_handle_t *dbh)
     dbh->db_info = NULL;
     return;
   }
+
+#ifdef PERF_DEBUG
+  db_info->toti.tv_sec = 0;
+  db_info->toti.tv_usec = 0;
+  db_info->totcnt = 0;
+
+  db_info->lati.tv_sec = 0;
+  db_info->lati.tv_usec = 0;
+  db_info->lastcnt = 0;
+
+  struct timezone foo;
+  gettimeofday(&db_info->lati, &foo);
+#endif // PERF_DEBUG
 
   db_info->stmt = NULL;
   dbh->db_info = db_info;
@@ -95,6 +120,12 @@ void __sqlite3_query_g_db_handle(gdbi_db_handle_t *dbh, char *query_str)
     return;
   }
 
+#ifdef PERF_DEBUG
+  struct timeval enter, leave, diff, sum;
+  struct timezone foo;
+  gettimeofday(&enter, &foo);
+#endif // PERF_DEBUG
+
   gdbi_sqlite3_ds_t *db_info = dbh->db_info;
   sqlite3_finalize(db_info->stmt);
   db_info->stmt = NULL;
@@ -116,6 +147,27 @@ void __sqlite3_query_g_db_handle(gdbi_db_handle_t *dbh, char *query_str)
   sqlite3_reset(stmt);
   db_info->stmt = stmt;
   dbh->status = status_cons(0, "query ok");
+
+#ifdef PERF_DEBUG
+  gettimeofday(&leave, &foo);
+  timersub(&leave, &enter, &diff);
+  timeradd(&diff, &db_info->toti, &sum);
+  db_info->toti = sum;
+  db_info->totcnt++;
+
+  if (0 == db_info->totcnt %10000)
+  {
+    timersub(&leave, &db_info->lati, &diff);
+
+    printf("time in sqlite3=%d.%6d secs; tot elapsed time=%d.%6d secs\n",
+      db_info->toti.tv_sec, db_info->toti.tv_usec,
+      diff.tv_sec, diff.tv_usec);
+
+    timerclear(&db_info->toti);
+    db_info->lati = leave;
+  }
+#endif // PERF_DEBUG
+
 }
 
 SCM __sqlite3_getrow_g_db_handle(gdbi_db_handle_t *dbh)
