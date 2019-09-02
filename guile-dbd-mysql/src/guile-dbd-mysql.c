@@ -23,8 +23,8 @@
 
 #include <guile-dbi/guile-dbi.h>
 #include <libguile.h>
-#include <mysql/mysql.h>
-#include <mysql/errmsg.h>
+#include <mariadb/mysql.h>
+#include <mariadb/errmsg.h>
 #include <string.h>
 #include <errno.h>
 #include <stdlib.h>
