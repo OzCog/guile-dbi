@@ -40,7 +40,7 @@ AC_PROG_LIBTOOL
 AC_CHECK_TOOL([AR], [ar], :)
 AC_CHECK_TOOL([NM], [nm], :)
 AC_PATH_PROG([GUILECONFIG], [guile-config], :)
-AC_PATH_PROG([MYSQLCONFIG], [mysql_config], :)
+AC_PATH_PROG([MYSQLCONFIG], [mariadb_config], :)
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_CANONICAL_HOST
@@ -54,14 +54,14 @@ AC_FUNC_MALLOC
 AC_HEADER_STDC 
 
 # Checks for libs
-AC_CHECK_LIB(mysqlclient,mysql_init,,
+AC_CHECK_LIB(mariadbclient,mysql_init,,
         AC_MSG_ERROR([*** Can't find libmysql]))
 
 CFLAGS=`guile-config compile`
 LIBS=`guile-config link`
 
-MYSQL_CFLAGS=`mysql_config --cflags`
-MYSQL_LIBS=`mysql_config --libs_r`
+MYSQL_CFLAGS=`mariadb_config --cflags`
+MYSQL_LIBS=`mariadb_config --libs_r`
 
 CFLAGS="${CFLAGS} ${MYSQL_CFLAGS}"
 LIBS="${LIBS} ${MYSQL_LIBS}"
