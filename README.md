@@ -83,4 +83,4 @@ License
 -------
 Guile-dbi is distributed under the Gnu GPLv2 license. Code and website
 were developed by Maurizio Boriani (2005-2006) and are currently
-maintained by Linas Vepstas (2008-2010).
+maintained by Linas Vepstas (2008-2019).
