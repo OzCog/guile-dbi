@@ -1,4 +1,4 @@
-Version 2.1.7: (2019)
+Version 2.1.7: (2019-09-02)
 	* include/guile-dbi/guile-dbi.h (gdbi_db_handle_t): Use 'lt_dlhandle'.
 	* src/guile-dbi.c: Replace libdl calls with their libltdl equivalences.
 	* Makefile.am (SUBDIRS): Add libltdl.
