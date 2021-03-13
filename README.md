@@ -22,7 +22,7 @@ special treatment for dates, currencies, etc. At this time, there is no
 support for prepared statements. Capable programmers are invited to add
 support for this and other missing features.
 
-Someone clever might wnt to figure out how to replace the C code by
+Someone clever might want to figure out how to replace the C code by
 generic FFI interfaces, so that there would not be any need at all for
 any C code. However, that takes more work, and the code here works OK,
 so, for now, things seem OK.
@@ -39,7 +39,7 @@ Mailing List
 ------------
 All discussion of guile-dbi should be directed to: guile-user@gnu.org.
 
-Bulding and Installing
+Building and Installing
 ----------------------
 Currently, the source code is organized into four distinct projects:
 The main database-independent code in DBI, and three different DBD
@@ -47,11 +47,11 @@ drivers.  You have to build each independently.  You will need to do
 something like this:
 
 ```
-apt-get install autoconf automake
+apt-get install autoconf automake texinfo
 ```
 or maybe
 ```
-yum install autoconf automake
+yum install autoconf automake texinfo
 ```
 Then:
 ```
