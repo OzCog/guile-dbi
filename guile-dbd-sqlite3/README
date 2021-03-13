@@ -17,7 +17,7 @@ To test: run
 
 Maintainer hints:
 
-	To build a clean, fresh tool envirnoment:
+	To build a clean, fresh tool environment:
 	Run ./autogen.sh or:
 
 		libtoolize

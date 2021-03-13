@@ -75,7 +75,7 @@ and Linas Vepstas <linasvepstas@gmail.org>
 
 Maintainer hints:
 
-	To build a clean, fresh tool envirnoment:
+	To build a clean, fresh tool environment:
 
 		libtoolize
 		aclocal
