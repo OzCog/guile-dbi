@@ -23,7 +23,6 @@
 
 
 AC_PREREQ(2.57)
-. $srcdir/DBI-VERSION
 AC_INIT(guile-dbi, 2.1.7, bug-guile@gnu.org)
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE
@@ -75,6 +74,7 @@ AC_ARG_WITH([guile-site-dir],
 	[guilesitedir="$GUILE_SITE"]
 )
 
+. $srcdir/DBI-VERSION
 AC_SUBST(DBI_MAJOR_VERSION)
 AC_SUBST(DBI_MINOR_VERSION)
 AC_SUBST(DBI_MICRO_VERSION)

@@ -23,7 +23,6 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.57)
-. $srcdir/DBD-VERSION
 AC_INIT(guile-dbd-sqlite3, 2.1.7, bug-guile@gnu.org)
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE
@@ -73,6 +72,7 @@ LIBS="${GUILE_LIBS} ${SQLITE3_LIBS}"
 AC_CHECK_LIB(sqlite3,sqlite3_open_v2,,
         AC_MSG_ERROR([*** Can't find sqlite3]))
 
+. $srcdir/DBD-VERSION
 AC_SUBST(DBD_MAJOR_VERSION)
 AC_SUBST(DBD_MINOR_VERSION)
 AC_SUBST(DBD_MICRO_VERSION)

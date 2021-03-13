@@ -22,7 +22,6 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.57)
-. $srcdir/DBD-VERSION
 AC_INIT(guile-dbd-mysql,2.1.7,bug-guile@gnu.org)
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE
@@ -66,6 +65,7 @@ MYSQL_LIBS=`mariadb_config --libs_r`
 CFLAGS="${CFLAGS} ${MYSQL_CFLAGS}"
 LIBS="${LIBS} ${MYSQL_LIBS}"
 
+. $srcdir/DBD-VERSION
 AC_SUBST(DBD_MAJOR_VERSION)
 AC_SUBST(DBD_MINOR_VERSION)
 AC_SUBST(DBD_MICRO_VERSION)
