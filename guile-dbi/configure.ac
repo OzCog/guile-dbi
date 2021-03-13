@@ -24,7 +24,7 @@
 
 AC_PREREQ(2.57)
 . $srcdir/DBI-VERSION
-AC_INIT(${PACKAGE}, ${VERSION}, bug-guile@gnu.org)
+AC_INIT(guile-dbi, 2.1.7, bug-guile@gnu.org)
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE
 AC_CONFIG_HEADER([config.h])

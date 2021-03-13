@@ -23,7 +23,7 @@
 
 
 AUTOMAKE_OPTIONS = gnu
-INCLUDES = $(CFLAGS) -I/usr/include 
+AM_CPPFLAGS = $(CFLAGS) -I/usr/include
 
 
 lib_LTLIBRARIES = libguile-dbd-postgresql.la

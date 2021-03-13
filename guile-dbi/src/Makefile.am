@@ -29,7 +29,7 @@ BUILT_SOURCES = guile-dbi.x
 
 SUFFIXES = .x
 .c.x:
-	$(GUILESNARF) $(DEFS) $(INCLUDES) $(CPPFLAFS) $(CFLAGS) $< > $@ \
+	$(GUILESNARF) $(DEFS) $(AM_CPPFLAGS) $(CPPFLAFS) $(CFLAGS) $< > $@ \
 	|| { rm $@; false; }
 
 lib_LTLIBRARIES = libguile-dbi.la 
