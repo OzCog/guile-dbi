@@ -23,7 +23,7 @@
 
 
 AUTOMAKE_OPTIONS = gnu
-INCLUDES = -I$(top_srcdir)/include -I/usr/include
+AM_CPPFLAGS = -I$(top_srcdir)/include -I/usr/include
 
 lib_LTLIBRARIES = libguile-dbd-test.la
 

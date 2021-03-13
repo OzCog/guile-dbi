@@ -23,7 +23,7 @@
 
 AUTOMAKE_OPTIONS = gnu
 SUBDIRS = dbi test
-INCLUDES = -I$(top_srcdir)/include -I/usr/include
+AM_CPPFLAGS = -I$(top_srcdir)/include -I/usr/include
 
 BUILT_SOURCES = guile-dbi.x
 
