@@ -1,3 +1,6 @@
+Version 2.1.8 (2021-03-13):
+	* Fix automake warnings.
+
 Version 2.1.7 (2019-09-02):  Nikita Vinokurov <yagel.x@gmail.com>
 	* Added forced clearing of async results before the next query.
 	* Numeric type is now considered as floating point.

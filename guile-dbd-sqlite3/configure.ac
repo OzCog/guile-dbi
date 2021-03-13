@@ -23,7 +23,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.57)
-AC_INIT(guile-dbd-sqlite3, 2.1.7, bug-guile@gnu.org)
+AC_INIT(guile-dbd-sqlite3, 2.1.8, bug-guile@gnu.org)
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE
 AC_CONFIG_HEADER([config.h])

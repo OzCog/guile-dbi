@@ -1,3 +1,7 @@
+Version 2.1.8 (2021-03-13):
+	* Fix automake warnings.
+	* Fix compiler warnings.
+
 Version 2.1.7 (2019-09-02):
 	* Change to MariaDB by default.
 
