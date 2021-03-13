@@ -82,6 +82,10 @@ AC_SUBST(DBI_INTERFACE)
 AC_SUBST(VERSION)
 AC_SUBST(guilesitedir)
 
+# Check for makeinfo; avoid ugliness if not installed.
+AC_CHECK_PROG(have_makeinfo,makeinfo,yes,no)
+AM_CONDITIONAL(HAVE_MAKEINFO,test "x$have_makeinfo" = "xyes")
+
 
 # Checks for library functions.
 AC_CONFIG_FILES([Makefile
