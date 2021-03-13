@@ -82,7 +82,7 @@ __mysql_make_g_db_handle(gdbi_db_handle_t* dbh)
   items = scm_to_int(scm_length(cp_list));
   if (items >= 5 && items < 8)
     {
-      int ret = 0;
+      void* ret = 0;
       int port = 0;
       char* user = scm_to_locale_string(scm_list_ref(cp_list,scm_from_int(0)));
       char* pass = scm_to_locale_string(scm_list_ref(cp_list,scm_from_int(1)));
@@ -107,7 +107,7 @@ __mysql_make_g_db_handle(gdbi_db_handle_t* dbh)
 	{
 	  char* sport  = scm_to_locale_string(scm_list_ref(cp_list,scm_from_int(5)));
 	  port = atoi(sport);
-	  ret = (int) mysql_real_connect(mysqlP->mysql, loc, user, pass, db, 
+	  ret = mysql_real_connect(mysqlP->mysql, loc, user, pass, db,
 					 port, NULL, 0);
 	  if (items == 7)
 	    {
@@ -117,7 +117,7 @@ __mysql_make_g_db_handle(gdbi_db_handle_t* dbh)
 	}
       else
 	{
-	  ret = (int) mysql_real_connect(mysqlP->mysql, NULL, user, pass, db, port, loc, 
+	  ret = mysql_real_connect(mysqlP->mysql, NULL, user, pass, db, port, loc,
 					 0);
 	  if (items == 6)
 	    {
