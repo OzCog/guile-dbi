@@ -19,6 +19,7 @@
 #include <sqlite3.h>
 #include <errno.h>
 #include <sys/time.h>
+#include <stdint.h>
 
 void __sqlite3_make_g_db_handle(gdbi_db_handle_t *dbh);
 void __sqlite3_close_g_db_handle(gdbi_db_handle_t *dbh);
@@ -210,7 +211,7 @@ SCM __sqlite3_getrow_g_db_handle(gdbi_db_handle_t *dbh)
           char *blob = (char *)sqlite3_column_blob(db_info->stmt, cur_col_idx);
           scm_t_array_handle array_handle;
           size_t val_size, i; ssize_t val_step;
-          scm_t_uint8 *elt = scm_u8vector_writable_elements(cur_val,
+          uint8_t *elt = scm_u8vector_writable_elements(cur_val,
             &array_handle,
             &val_size,
             &val_step);
