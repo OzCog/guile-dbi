@@ -30,10 +30,10 @@ so, for now, things seem OK.
 Documentation
 -------------
 The guile-dbi user-manual and reference is
-[here](http://htmlpreview.github.com/?https://github.com/opencog/guile-dbi/blob/master/website/guile-dbi.html).
+[here](https://htmlpreview.github.io/?https://github.com/opencog/guile-dbi/blob/master/website/guile-dbi.html).
 
 A copy of the old, defunct website is
-[here](http://htmlpreview.github.com/?https://github.com/opencog/guile-dbi/blob/master/website/index.html).
+[here](https://htmlpreview.github.io/?https://github.com/opencog/guile-dbi/blob/master/website/index.html).
 
 Mailing List
 ------------
@@ -75,7 +75,7 @@ sudo make install
 ```
 
 After doing this, the tutorial in
-[the user manual](http://htmlpreview.github.com/?https://github.com/opencog/guile-dbi/blob/master/website/guile-dbi.html)
+[the user manual](https://htmlpreview.github.io/?https://github.com/opencog/guile-dbi/blob/master/website/guile-dbi.html)
 should work fine.
 
 
