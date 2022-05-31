@@ -22,12 +22,12 @@
 # Process this file with autoconf to produce a configure script.
 
 
-AC_PREREQ(2.57)
-AC_INIT(guile-dbi, 2.1.8, bug-guile@gnu.org)
+AC_PREREQ([2.71])
+AC_INIT([guile-dbi],[2.1.8],[bug-guile@gnu.org])
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE
-AC_CONFIG_HEADER([config.h])
-AC_GNU_SOURCE
+AC_CONFIG_HEADERS([config.h])
+AC_USE_SYSTEM_EXTENSIONS
 
 maintainer_mode=${enable_maintainer_mode-no}
 
