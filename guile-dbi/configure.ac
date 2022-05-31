@@ -35,7 +35,7 @@ maintainer_mode=${enable_maintainer_mode-no}
 AC_PROG_CC
 AM_PROG_AS
 AC_PROG_INSTALL
-AC_PROG_LIBTOOL
+LT_INIT
 AC_PROG_MAKE_SET
 AC_CHECK_TOOL([AR], [ar], :)
 AC_CHECK_TOOL([NM], [nm], :)
