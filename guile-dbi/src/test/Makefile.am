@@ -24,13 +24,15 @@
 
 AUTOMAKE_OPTIONS = gnu
 AM_CPPFLAGS = -I$(top_srcdir)/include -I/usr/include
+AM_CFLAGS = $(GUILE_CFLAGS)
+LDADD = $(GUILE_LIBS)
 
 lib_LTLIBRARIES = libguile-dbd-test.la
 
 
 libguile_dbd_test_la_SOURCES = guile-dbd-test.c
-libguile_dbd_test_la_LIBADD = -ldl $(LIBS)
-libguile_dbd_test_la_LDFLAGS = -export-dynamic 
+libguile_dbd_test_la_LIBADD = -ldl $(GUILE_LTLIBS)
+libguile_dbd_test_la_LDFLAGS = -export-dynamic
 libguile_dbd_test_la_DEPENDENCIES = $(LTLIBOBJS)
 
 EXTRA_DIST=check-guile-dbi.in grg/begin.grg grg/dbd-test.scm

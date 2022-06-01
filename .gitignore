@@ -62,6 +62,7 @@ guile-dbi/config.h.in~
 guile-dbi/config.log
 guile-dbi/config.sub
 guile-dbi/configure
+guile-dbi/configure~
 guile-dbi/conftest/
 guile-dbi/depcomp
 guile-dbi/doc/Makefile
