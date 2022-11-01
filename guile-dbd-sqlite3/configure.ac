@@ -65,7 +65,7 @@ GUILE_LIBS=`guile-config link`
 SQLITE3_CFLAGS=`pkg-config sqlite3 --cflags`
 SQLITE3_LIBS=`pkg-config sqlite3 --libs`
 
-CFLAGS="${GUILE_CFLAGS} ${SQLITE3_CFLAGS}"
+CFLAGS="${CFLAGS} ${GUILE_CFLAGS} ${SQLITE3_CFLAGS}"
 LIBS="${GUILE_LIBS} ${SQLITE3_LIBS}"
 
 # Checks for libs
