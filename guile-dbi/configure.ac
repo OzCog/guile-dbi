@@ -21,8 +21,8 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.71])
-AC_INIT([guile-dbi],[2.1.9],[bug-guile@gnu.org])
+AC_PREREQ([2.69])
+AC_INIT([guile-dbi],[2.1.10],[bug-guile@gnu.org])
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE
 AC_CONFIG_SRCDIR([config.h.in])
@@ -40,14 +40,13 @@ AC_PROG_CPP
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
-AC_PROG_RANLIB
 AM_PROG_AR
 AM_PROG_AS
 AC_CHECK_TOOL([NM], [nm], :)
 AC_CHECK_TOOL([GREG], [greg], :)
 AC_PATH_PROG([GUILESNARF], [guile-snarf], :)
 
-LT_PREREQ([2.4.7])
+LT_PREREQ([2.4.6])
 LT_INIT([dlopen])
 LT_CONFIG_LTDL_DIR([libltdl])
 LTDL_INIT
