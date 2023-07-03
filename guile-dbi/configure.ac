@@ -22,7 +22,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([guile-dbi],[2.1.10],[bug-guile@gnu.org])
+AC_INIT([guile-dbi],[2.1.9],[bug-guile@gnu.org])
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE
 AC_CONFIG_SRCDIR([config.h.in])
