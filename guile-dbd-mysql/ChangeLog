@@ -1,3 +1,6 @@
+Version 2.1.9 (2023-07-03):
+	* Update autotools scripts.
+
 Version 2.1.8 (2021-03-13):
 	* Fix automake warnings.
 	* Fix compiler warnings.

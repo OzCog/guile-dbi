@@ -24,7 +24,7 @@
 
 #include <guile-dbi/guile-dbi.h>
 #include <libguile.h>
-#include <postgresql/libpq-fe.h>
+#include <libpq-fe.h>
 #include <string.h>
 #include <errno.h>
 #include <stdio.h>

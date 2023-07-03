@@ -21,12 +21,13 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.57)
-AC_INIT(guile-dbd-postgresql, 2.1.8, bug-guile@gnu.org)
+AC_PREREQ([2.69])
+AC_INIT([guile-dbd-postgresql],[2.1.9],[bug-guile@gnu.org])
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE
-AC_CONFIG_HEADER([config.h])
-AC_GNU_SOURCE
+AC_CONFIG_HEADERS([config.h])
+AC_USE_SYSTEM_EXTENSIONS
+PKG_PREREQ(0.29)
 
 maintainer_mode=${enable_maintainer_mode-no}
 
@@ -37,7 +38,7 @@ LT_INIT
 AC_PROG_CC
 AC_PROG_CXX
 AM_PROG_AS
-AC_PROG_LIBTOOL
+LT_INIT
 AC_CHECK_TOOL([AR], [ar], :)
 AC_CHECK_TOOL([NM], [nm], :)
 AC_PATH_PROG([GUILECONFIG], [guile-config], :)
@@ -52,13 +53,16 @@ AC_CHECK_FUNCS([strerror])
 AC_CHECK_FUNCS([strndup])
 AC_CHECK_HEADERS([string.h])
 AC_FUNC_MALLOC
-AC_HEADER_STDC
 
 # Checks for libs.
-AC_CHECK_LIB(pq,PQconnectStart,,
-        AC_MSG_ERROR([*** Can't find libpq]))
+PKG_CHECK_MODULES([PQ], [libpq],,
+AC_MSG_ERROR([*** Can't find libpq]))
 
-CFLAGS="${CFLAGS} `guile-config compile`"
+PKG_CHECK_MODULES([GUILE_DBI], [guile-dbi],,
+AC_MSG_ERROR([*** Can't find guile-dbi]))
+
+CFLAGS="${CFLAGS:+${CFLAGS} }$PQ_CFLAGS $GUILE_DBI_CFLAGS \
+        `guile-config compile`"
 LIBS=`guile-config link`
 
 . $srcdir/DBD-VERSION
@@ -69,7 +73,7 @@ AC_SUBST(DBD_INTERFACE)
 AC_SUBST(VERSION)
 
 AC_CONFIG_FILES([Makefile
-		 src/Makefile])
+                 src/Makefile])
 
 AC_OUTPUT
 

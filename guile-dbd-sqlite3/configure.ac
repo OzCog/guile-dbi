@@ -22,12 +22,13 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.57)
-AC_INIT(guile-dbd-sqlite3, 2.1.8, bug-guile@gnu.org)
+AC_PREREQ([2.69])
+AC_INIT([guile-dbd-sqlite3],[2.1.9],[bug-guile@gnu.org])
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE
-AC_CONFIG_HEADER([config.h])
-AC_GNU_SOURCE
+AC_CONFIG_HEADERS([config.h])
+AC_USE_SYSTEM_EXTENSIONS
+PKG_PREREQ(0.29)
 
 maintainer_mode=${enable_maintainer_mode-no}
 
@@ -38,13 +39,10 @@ LT_INIT
 AC_PROG_CC
 AC_PROG_CXX
 AM_PROG_AS
-AC_PROG_LIBTOOL
+LT_INIT
 AC_CHECK_TOOL([AR], [ar], :)
 AC_CHECK_TOOL([NM], [nm], :)
 AC_PATH_PROG([GUILECONFIG], [guile-config], :)
-
-# wtf ... why is this not expanding ???
-# PKG_PROG_PKG_CONFIG
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_CANONICAL_HOST
@@ -55,22 +53,18 @@ AC_CHECK_FUNCS([strerror])
 AC_CHECK_FUNCS([strndup])
 AC_CHECK_HEADERS([string.h])
 AC_FUNC_MALLOC
-AC_HEADER_STDC
 
 GUILE_CFLAGS=`guile-config compile`
 GUILE_LIBS=`guile-config link`
 
-# wtf
-# PKG_CHECK_MODULES(SQLITE3, sqlite3 >= 3.0.0)
-SQLITE3_CFLAGS=`pkg-config sqlite3 --cflags`
-SQLITE3_LIBS=`pkg-config sqlite3 --libs`
+PKG_CHECK_MODULES([SQLITE3], [sqlite3],,
+AC_MSG_ERROR([*** Can't find sqlite3]))
+PKG_CHECK_MODULES([GUILE_DBI], [guile-dbi],,
+AC_MSG_ERROR([*** Can't find guile-dbi]))
 
-CFLAGS="${CFLAGS} ${GUILE_CFLAGS} ${SQLITE3_CFLAGS}"
+CFLAGS="${CFLAGS:+${CFLAGS} }${GUILE_CFLAGS} \
+        ${GUILE_DBI_CFLAGS} ${SQLITE3_CFLAGS}"
 LIBS="${GUILE_LIBS} ${SQLITE3_LIBS}"
-
-# Checks for libs
-AC_CHECK_LIB(sqlite3,sqlite3_open_v2,,
-        AC_MSG_ERROR([*** Can't find sqlite3]))
 
 . $srcdir/DBD-VERSION
 AC_SUBST(DBD_MAJOR_VERSION)
@@ -81,9 +75,8 @@ AC_SUBST(VERSION)
 AC_SUBST(SQLITE3_CFLAGS)
 AC_SUBST(SQLITE3_LIBS)
 
-
 AC_CONFIG_FILES([Makefile
-		 src/Makefile])
+                 src/Makefile])
 
 AC_OUTPUT
 

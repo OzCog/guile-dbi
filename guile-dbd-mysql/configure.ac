@@ -21,12 +21,13 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.57)
-AC_INIT(guile-dbd-mysql,2.1.8,bug-guile@gnu.org)
+AC_PREREQ([2.69])
+AC_INIT([guile-dbd-mysql],[2.1.9],[bug-guile@gnu.org])
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE
-AC_CONFIG_HEADER([config.h])
-AC_GNU_SOURCE
+AC_CONFIG_HEADERS([config.h])
+AC_USE_SYSTEM_EXTENSIONS
+PKG_PREREQ(0.29)
 
 maintainer_mode=${enable_maintainer_mode-no}
 
@@ -35,7 +36,7 @@ AC_CONFIG_MACRO_DIR([m4])
 # Checks for programs.
 AC_PROG_CC
 AM_PROG_AS
-AC_PROG_LIBTOOL
+LT_INIT
 AC_CHECK_TOOL([AR], [ar], :)
 AC_CHECK_TOOL([NM], [nm], :)
 AC_PATH_PROG([GUILECONFIG], [guile-config], :)
@@ -48,21 +49,21 @@ AC_C_VOLATILE
 
 AC_CHECK_FUNCS([strerror])
 AC_CHECK_FUNCS([strndup])
-AC_CHECK_HEADERS([string.h]) 
+AC_CHECK_HEADERS([string.h])
 AC_FUNC_MALLOC
-AC_HEADER_STDC 
 
 # Checks for libs
-AC_CHECK_LIB(mariadbclient,mysql_init,,
-        AC_MSG_ERROR([*** Can't find libmysql]))
+PKG_CHECK_MODULES([MYSQL], [libmariadb],,
+AC_MSG_ERROR([*** Can't find libmariadb]))
+PKG_CHECK_MODULES([GUILE_DBI], [guile-dbi],,
+AC_MSG_ERROR([*** Can't find guile-dbi]))
 
-CFLAGS=`guile-config compile`
+CFLAGS="${CFLAGS:+${CFLAGS} }$MYSQL_CFLAGS $GUILE_DBI_CFLAGS \
+`guile-config compile`"
 LIBS=`guile-config link`
 
-MYSQL_CFLAGS=`mariadb_config --cflags`
 MYSQL_LIBS=`mariadb_config --libs_r`
 
-CFLAGS="${CFLAGS} ${MYSQL_CFLAGS}"
 LIBS="${LIBS} ${MYSQL_LIBS}"
 
 . $srcdir/DBD-VERSION
