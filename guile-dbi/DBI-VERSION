@@ -12,7 +12,7 @@ DBI_MINOR_VERSION=1
 # dnl     3) Increment when interfaces not changed at all,
 # dnl               only bug fixes or internal changes made.
 # dnl     4b) Set to zero when adding, removing or changing interfaces.
-DBI_MICRO_VERSION=8
+DBI_MICRO_VERSION=10
 
 DBI_EFFECTIVE_VERSION=${DBI_MAJOR_VERSION}.${DBI_MINOR_VERSION}
 DBI_VERSION=${DBI_EFFECTIVE_VERSION}.${DBI_MICRO_VERSION}
@@ -23,4 +23,3 @@ DBI_ITF_CURRENT=${DBI_MAJOR_VERSION}
 DBI_ITF_REVISION=${DBI_MICRO_VERSION}
 DBI_ITF_AGE=0
 DBI_INTERFACE="${DBI_ITF_CURRENT}:${DBI_ITF_REVISION}:${DBI_ITF_AGE}"
-

@@ -1,3 +1,6 @@
+Version 2.1.10 (2023-07-03):
+	* Update autoconf scripts.
+
 Version 2.1.8 (2021-03-13):
 	* Fix automake warnings.
 	* Enable build even if makeinfo (texinfo) not installed.
