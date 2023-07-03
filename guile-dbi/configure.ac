@@ -87,4 +87,8 @@ AC_CONFIG_FILES([Makefile
                  src/Makefile
                  src/dbi/Makefile
                  src/test/Makefile])
+
+AC_CONFIG_FILES([src/test/check-guile-dbi],
+                [chmod ugo+x src/test/check-guile-dbi])
+
 AC_OUTPUT
