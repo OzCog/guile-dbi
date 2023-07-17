@@ -53,13 +53,13 @@ LTDL_INIT
 
 # Checks for libraries.
 PKG_CHECK_MODULES([GUILE], [guile-3.0])
-#GUILE_PKG([3.0])
-#GUILE_FLAGS
-#GUILE_SITE_DIR
+GUILE_PKG([3.0])
+GUILE_FLAGS
+GUILE_SITE_DIR
 #--
-#CFLAGS="${CFLAGS} ${LTDLINCL} `$GUILECONFIG compile`"
-#LIBS="$LIBLTDL `$GUILECONFIG link`"
-#GUILE_SITE=`$GUILECONFIG info sitedir`
+CFLAGS="${CFLAGS} ${LTDLINCL} `$GUILE_CONFIG compile`"
+LIBS="$LIBLTDL `$GUILE_CONFIG link`"
+GUILE_SITE=`$GUILE_CONFIG info sitedir`
 
 # Check for makeinfo; avoid ugliness if not installed.
 AC_CHECK_PROG(have_makeinfo,makeinfo,yes,no)
