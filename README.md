@@ -39,6 +39,9 @@ Mailing List
 ------------
 All discussion of guile-dbi should be directed to: guile-user@gnu.org.
 
+Bugs should be reported to the
+[guile-dbi github site](https://github.com/opencog/guile-dbi).
+
 Building and Installing
 ----------------------
 Currently, the source code is organized into four distinct projects:
