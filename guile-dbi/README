@@ -1,5 +1,5 @@
 
-                     README - info file
+              README - info file
 
 Copyright (C) 2005,2008,2010 Free Software Foundation, Inc.
 
@@ -16,10 +16,9 @@ and Linas Vepstas <linasvepstas@gmail.org>
  plugins, which connect to the actual SQL server. Currently, there are
  DBD backends for PostgreSQL, MySQL and SQLite3.
 
- Please send patches and bug reports to guile-user@gnu.org, and be sure
- to copy Linas Vepstas <linasvepstas@gmail.com>. Alternately, they may
- be posted at bug reports to https://gna.org/bugs/?group=guile-dbi, in
- which case the mailing list should be notified anyway.
+ Please post patches and bug reports in github, at
+ https://githib.com/opencog/guile-dbi.
+ It might be useful to also notify guile-user@gnu.org (and cc Linas)
 
 * Guile DBI dependencies
 
@@ -40,6 +39,7 @@ and Linas Vepstas <linasvepstas@gmail.org>
 * Compiling
 
    The standard build tools should work:
+   ./autogen.sh
    ./configure
    make
    make install
@@ -66,7 +66,7 @@ and Linas Vepstas <linasvepstas@gmail.org>
 * Verifying
 
    The system is distributed using the normal tar.gz format; it can be
-   extracted using the "tar -zxf guile-dbi-2.1.6.tar.gz" command at the
+   extracted using the "tar -zxf guile-dbi-2.1.8.tar.gz" command at the
    command line.
 
    The files have been digitally signed to make sure that there was no
@@ -74,7 +74,7 @@ and Linas Vepstas <linasvepstas@gmail.org>
    no malicious changes were made to the code internals by third
    parties. The signatures can be checked with the gpg command:
 
-   gpg --verify guile-dbi-2.1.6.tar.gz.asc
+   gpg --verify guile-dbi-2.1.8.tar.gz.asc
 
    which should generate output identical to (except for the date):
 
