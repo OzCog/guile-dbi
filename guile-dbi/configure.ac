@@ -57,6 +57,20 @@ GUILE_PKG([3.0])
 GUILE_FLAGS
 GUILE_SITE_DIR
 
+#--
+# The following are commented out because they should not be needed.
+# They are left here as a hack of last resort. If things are not working
+# as expected, be sure to try setting the ACLOCAL_PATH first! Like so:
+#
+#    ACLOCAL_PATH=/usr/local/share/aclocal/ ./autogen.sh --no-configure
+#
+# If that doesn't fix things, then maybe uncommenting the lines below
+# will solve something. Maybe. Maybe not.
+#
+# CFLAGS="${CFLAGS} ${LTDLINCL} `$GUILE_CONFIG compile`"
+# LIBS="$LIBLTDL `$GUILE_CONFIG link`"
+# GUILE_SITE=`$GUILE_CONFIG info sitedir`
+
 # Check for makeinfo; avoid ugliness if not installed.
 AC_CHECK_PROG(have_makeinfo,makeinfo,yes,no)
 AM_CONDITIONAL(HAVE_MAKEINFO,test "x$have_makeinfo" = "xyes")

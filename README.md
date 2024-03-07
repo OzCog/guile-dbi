@@ -60,6 +60,13 @@ Then:
 ```
 cd guile-dbi
 ./autogen.sh --no-configure
+```
+Optionally:
+```
+ACLOCAL_PATH=/usr/local/share/aclocal/ ./autogen.sh --no-configure
+```
+Then
+```
 mkdir build
 cd build
 ../configure
